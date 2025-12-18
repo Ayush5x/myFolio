@@ -29,9 +29,6 @@ main()
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
 
 
 app.get("/",(req,res)=>{
@@ -74,3 +71,5 @@ app.post("/home",async(req,res)=>{
 //   }).catch((err)=>{
 //     console.log("Error saving message to the database:", err);
 //   });
+
+module.exports = app;
