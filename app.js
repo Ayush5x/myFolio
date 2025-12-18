@@ -12,24 +12,12 @@ const Info = require('./model/info');
 require("dotenv").config();
 const sendEmail = require("./utils/sendEmail");
 
-
-async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/myFolio_db");
-}
-main()
-  .then(() => {
-    console.log("Mongo Connection Open!!!");
-  })
-  .catch((err) => {
-    console.log("Mongo Connection Error!!!");
-    console.log(err);
-  });
-
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Atlas Connected"))
+  .catch(err => console.error("❌ MongoDB Error:", err));
 
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
-
-
 
 app.get("/",(req,res)=>{
     res.render("index.ejs")
@@ -38,38 +26,39 @@ app.get("/home",(req,res)=>{
     res.render("index.ejs")
 })
 
-app.post("/home",async(req,res)=>{
-  try{
-    const {name,email,message} = req.body;
-    const info = new Info ({name,email,message});
-    await info.save();
-    await sendEmail({ name, email, message });
-    res.redirect("/home");
+app.post("/home", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
 
-  }catch(err){
-    console.log("Error in saving message or sending email:", err);
-    res.status(500).send("Internal Server Error");
+   const newInfo = {
+    name: name,
+    email: email,
+    message: message  
+   }
+
+   const info = new Info(newInfo);
+   await info.save();
+   
+
+    await sendEmail({
+      name,
+      email,
+      message
+    });
+
+   res.send("Your message has been sent successfully!");
+  } catch (err) {
+    console.error(err);
+    res.status(400).render("error");
   }
-    
-
 });
 
-
-// app.get("/home",(req,res)=>{
-//     res.render("index.ejs")
-// });
-
-
-// let message1 = new Info ({
-//     name: "John Doe",
-//     email: "jhon1920@gmail.com",
-//     message: "Hello, this is a test message."
-//   });
-
-//   message1.save().then(()=>{
-//     console.log("Message saved to the database.");
-//   }).catch((err)=>{
-//     console.log("Error saving message to the database:", err);
-//   });
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
 
 module.exports = app;
+
+

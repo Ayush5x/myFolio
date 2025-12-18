@@ -24,51 +24,7 @@ document.addEventListener("click", (e) => {
   }
 })
 
-// Contact form submission
-const contactForm = document.getElementById("contactForm")
-const formMessage = document.getElementById("formMessage")
 
-if (contactForm) {
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault()
-
-    const formData = {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      subject: document.getElementById("subject").value,
-      message: document.getElementById("message").value,
-    }
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const result = await response.json()
-
-      if (result.success) {
-        formMessage.textContent = result.message
-        formMessage.className = "form-message success"
-        contactForm.reset()
-      } else {
-        formMessage.textContent = result.message
-        formMessage.className = "form-message error"
-      }
-
-      setTimeout(() => {
-        formMessage.style.display = "none"
-        formMessage.className = "form-message"
-      }, 5000)
-    } catch (error) {
-      formMessage.textContent = "An error occurred. Please try again."
-      formMessage.className = "form-message error"
-    }
-  })
-}
 
 // Smooth scroll with offset for fixed navbar
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -129,16 +85,6 @@ window.addEventListener("scroll", () => {
     }
   })
 })
-// Dark mode toggle
-const darkModeToggle = document.getElementById("darkModeToggle")
-darkModeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode")
-})
-
-// Save dark mode preference
-if (localStorage.getItem("darkMode") === "enabled") {
-  document.body.classList.add("dark-mode")
-}  
 
 
 
