@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 const Info = require('./model/info');
 require("dotenv").config();
 const sendEmail = require("./utils/sendEmail");
+app.set("views", path.join(__dirname, "views"));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Atlas Connected"))
@@ -20,10 +21,10 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 
 app.get("/",(req,res)=>{
-    res.render("index.ejs")
+    res.render("index")
 })
 app.get("/home",(req,res)=>{
-    res.render("index.ejs")
+    res.render("index")
 })
 
 app.post("/home", async (req, res) => {
@@ -46,7 +47,7 @@ app.post("/home", async (req, res) => {
       message
     });
 
-   res.send("Your message has been sent successfully!");
+   res.redirect("/home")
   } catch (err) {
     console.error(err);
     res.status(400).render("error");
