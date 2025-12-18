@@ -19,6 +19,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
+app.use(express.json()); 
 
 app.get("/",(req,res)=>{
     res.render("index")
