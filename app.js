@@ -28,8 +28,6 @@ app.get("/home",(req,res)=>{
     res.render("index")
 })
 
-
-
 app.post("/home", async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).render("error");
