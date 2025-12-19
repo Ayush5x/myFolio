@@ -87,4 +87,12 @@ window.addEventListener("scroll", () => {
 })
 
 
+document.querySelectorAll("section").forEach((section) => {
+  if (section.querySelector("img")) return; // ⛔ skip image sections
+
+  section.style.opacity = "0";
+  section.style.transform = "translateY(20px)";
+  section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+  observer.observe(section);
+});
 
