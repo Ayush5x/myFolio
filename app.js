@@ -29,9 +29,7 @@ app.get("/home",(req,res)=>{
 })
 
 app.post("/home", async (req, res) => {
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(503).render("error");
-  }
+  
 
   try {
    const { name, email, message } = req.body;
