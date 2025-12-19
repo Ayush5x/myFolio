@@ -28,9 +28,15 @@ app.get("/home",(req,res)=>{
     res.render("index")
 })
 
+
+
 app.post("/home", async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).render("error");
+  }
+
   try {
-    const { name, email, message } = req.body;
+   const { name, email, message } = req.body;
 
    const newInfo = {
     name: name,
@@ -55,8 +61,12 @@ app.post("/home", async (req, res) => {
   }
 });
 
+
 app.get('/error', (req, res) => {
   res.render('error');
+});
+app.get('/succes', (req, res) => {
+  res.render('succes');
 });
 
 if (process.env.NODE_ENV !== "production") {
