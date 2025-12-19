@@ -48,7 +48,7 @@ app.post("/home", async (req, res) => {
       message
     });
 
-   res.redirect("/home")
+   res.render('succes');
   } catch (err) {
     console.error(err);
     res.status(400).render("error");
