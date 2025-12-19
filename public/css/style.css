@@ -418,19 +418,11 @@ section {
   top: 20px;
   /* background-image: url(../MyImage.jpg); */
   background-size: cover;
-  /* aspect-ratio: 1;
-  clip-path: shape(from 11.72% 43.36%,curve to 27.60% 17.32% with 9.49% 24.29%,curve to 64.70% 13.48% with 45.71% 10.34%,curve to 84.88% 35.42% with 83.69% 16.61%,curve to 76.93% 66.41% with 86.08% 54.23%,curve to 52.46% 82.42% with 67.79% 78.59%,curve to 25.55% 74.34% with 37.13% 86.26%,curve to 11.72% 43.36% with 13.96% 62.43%); */
   /* animation: blob 8s infinite ease-in-out;
   transition: all 0.3s ease-in-out; */
-  /* opacity: 0; */
-  /* transform: scale(0.95);
-  transition: all 0.6s ease; */
 
 }
-.myImg.show {
-  opacity: 1;
-  transform: scale(1);
-}
+
 
 
 /* @keyframes blob {

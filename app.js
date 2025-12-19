@@ -55,6 +55,10 @@ app.post("/home", async (req, res) => {
   }
 });
 
+app.get('/error', (req, res) => {
+  res.render('error');
+});
+
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
